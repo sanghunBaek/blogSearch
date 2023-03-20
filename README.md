@@ -1,27 +1,17 @@
-# Getting Started
+# 블로그 검색 기능 개발 
 
-### Reference Documentation
-
-For further reference, please consider the following sections:
-
-* [Official Gradle documentation](https://docs.gradle.org)
-* [Spring Boot Gradle Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.7.9/gradle-plugin/reference/html/)
-* [Create an OCI image](https://docs.spring.io/spring-boot/docs/2.7.9/gradle-plugin/reference/html/#build-image)
-* [Spring Web](https://docs.spring.io/spring-boot/docs/2.7.9/reference/htmlsingle/#web)
-* [Spring Data JPA](https://docs.spring.io/spring-boot/docs/2.7.9/reference/htmlsingle/#data.sql.jpa-and-spring-data)
-
-### Guides
-
-The following guides illustrate how to use some features concretely:
-
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
-* [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)
-
-### Additional Links
-
-These additional references should also help you:
-
-* [Gradle Build Scans – insights for your project's build](https://scans.gradle.com#gradle)
-
+### 구현 사항 
+---
+#### 생성 API 
+- 블로그 검색 API 
+    - 키워드에 따른 검색 
+- 검색 랭킹 API 
+    - 만이 검색된 키워드 랭킹 조회 
+---  
+#### 명세서 작성 
+- Spring Rest Docs 활용 
+- jar 파일 실행 이후 localhost:8080/docs/index.html 접속 
+---  
+### 외부 라이브러리 
+- modelmapper : 객체 변환 
+- spring-restdocs-mockmvc : 명세 작성 
