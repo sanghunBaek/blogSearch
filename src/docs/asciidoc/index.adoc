@@ -1,0 +1,23 @@
+= Blog Search REST Docs
+
+블로그 검색 api 명세서
+
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+[[Search-API]]
+== Search API
+
+[[검색-순위]]
+=== 검색 순위 api
+==== 검색 키워드 Top 10 결과 출력
+operation::search-controller-test/search-top10-rank[snippets='curl-request,http-request,http-response,response-fields']
+
+[[블로그-검색]]
+=== 블로그 검색 api
+==== 블로그 검색 결과 출력
+operation::search-controller-test/search-blog[snippets='curl-request,request-parameters,http-request,http-response,response-fields']

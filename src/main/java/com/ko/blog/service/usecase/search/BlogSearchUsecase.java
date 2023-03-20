@@ -79,7 +79,7 @@ public class BlogSearchUsecase {
             private String url;
             private String blogname;
             private String thumbnail;
-            private String datatime;
+            private String datetime;
         }
     }
 }

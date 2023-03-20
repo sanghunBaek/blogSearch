@@ -1,6 +1,7 @@
 package com.ko.blog.service.controller;
 
 import com.ko.blog.service.usecase.search.BlogSearchUsecase;
+import com.ko.blog.service.usecase.search.SearchRankUsecase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SearchController {
 
     private final BlogSearchUsecase blogSearchUsecase;
+    private final SearchRankUsecase searchRankUsecase;
 
     @GetMapping("/search/blog")
     public ResponseEntity<?> searchBlog(
@@ -24,5 +26,10 @@ public class SearchController {
         BlogSearchUsecase.Command command =
                 BlogSearchUsecase.Command.builder().query(query).sort(sort).page(page).size(size).build();
         return ResponseEntity.ok().body(blogSearchUsecase.execute(command));
+    }
+
+    @GetMapping("/search/rank")
+    public ResponseEntity<?> searchRank() {
+        return ResponseEntity.ok().body(searchRankUsecase.execute());
     }
 }

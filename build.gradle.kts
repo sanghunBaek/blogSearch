@@ -3,6 +3,7 @@ plugins {
     id("org.springframework.boot") version "2.7.9"
     id("io.spring.dependency-management") version "1.0.15.RELEASE"
     id("com.diffplug.spotless") version("6.11.0")
+    id("org.asciidoctor.jvm.convert") version ("3.3.2")
 }
 
 group = "com.ko"
@@ -13,6 +14,7 @@ configurations {
     compileOnly {
         extendsFrom(configurations.annotationProcessor.get())
     }
+
 }
 
 repositories {
@@ -29,6 +31,9 @@ dependencies {
     runtimeOnly("com.h2database:h2")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+//    asciidoctorExt("org.springframework.restdocs:spring-restdocs-asciidoctor")
+    testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
 }
 
 tasks.withType<Test> {
@@ -50,4 +55,31 @@ spotless {
     }
 }
 
+val asciidoctorExt: Configuration by configurations.creating
+dependencies {
+    asciidoctorExt("org.springframework.restdocs:spring-restdocs-asciidoctor")
+}
+
+val snippetsDir by extra { file("build/generated-snippets") }
+tasks {
+    test {
+        outputs.dir(snippetsDir)
+    }
+
+    asciidoctor {
+        inputs.dir(snippetsDir)
+        configurations(asciidoctorExt.name)
+        dependsOn(test)
+        doLast {
+            copy {
+                from("build/docs/asciidoc")
+                into("src/main/resources/static/docs")
+            }
+        }
+    }
+
+    build {
+        dependsOn(asciidoctor)
+    }
+}
 

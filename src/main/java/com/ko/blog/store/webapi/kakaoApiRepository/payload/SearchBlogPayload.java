@@ -34,6 +34,6 @@ public class SearchBlogPayload {
         private String url;
         private String blogname;
         private String thumbnail;
-        private String datatime;
+        private String datetime;
     }
 }

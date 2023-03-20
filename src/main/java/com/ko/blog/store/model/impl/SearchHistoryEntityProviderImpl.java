@@ -3,6 +3,7 @@ package com.ko.blog.store.model.impl;
 import com.ko.blog.store.dataprovider.serch.SearchHistoryEntityProvider;
 import com.ko.blog.store.model.entity.SearchHistoryEntity;
 import com.ko.blog.store.model.repository.SearchHistoryRepository;
+import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,5 +26,9 @@ public class SearchHistoryEntityProviderImpl implements SearchHistoryEntityProvi
         SearchHistoryEntity searchHistory = entity.get();
         searchHistory.setCount(searchHistory.getCount() + 1);
         return searchHistoryRepository.save(searchHistory);
+    }
+
+    public List<SearchHistoryEntity> getKeywordTopTen() {
+        return searchHistoryRepository.findTop10ByOrderByCountDesc();
     }
 }

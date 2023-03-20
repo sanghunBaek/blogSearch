@@ -16,6 +16,9 @@ import reactor.netty.http.client.HttpClient;
 @Service
 @Slf4j
 public class Webclient {
+
+    private String KAKAO_API_KEY = "d1c748746e8672dcd5e2531fc0be695c";
+
     HttpClient httpClient =
             HttpClient.create()
                     .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
@@ -29,7 +32,7 @@ public class Webclient {
         return WebClient.builder()
                 .clientConnector(new ReactorClientHttpConnector(httpClient.wiretap("kakaoApi")))
                 .baseUrl("https://dapi.kakao.com")
-                .defaultHeader("Authorization", "KakaoAK d1c748746e8672dcd5e2531fc0be695c")
+                .defaultHeader("Authorization", "KakaoAK " + KAKAO_API_KEY)
                 .filter(
                         (request, next) -> {
                             log.info("Request: {} {}", request.method(), request.url());
