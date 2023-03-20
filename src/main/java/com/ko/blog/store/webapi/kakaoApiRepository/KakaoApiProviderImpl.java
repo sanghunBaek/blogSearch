@@ -1,6 +1,6 @@
 package com.ko.blog.store.webapi.kakaoApiRepository;
 
-import com.ko.blog.store.dataprovider.kakao.SearchDataApiProvider;
+import com.ko.blog.store.dataprovider.kakao.KaKaoApiProvider;
 import com.ko.blog.store.webapi.Webclient;
 import com.ko.blog.store.webapi.kakaoApiRepository.payload.SearchBlogPayload;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +10,7 @@ import org.springframework.util.MultiValueMap;
 
 @Service
 @RequiredArgsConstructor
-public class KakaoApiService implements SearchDataApiProvider {
+public class KakaoApiProviderImpl implements KaKaoApiProvider {
 
     private final Webclient webclient;
 

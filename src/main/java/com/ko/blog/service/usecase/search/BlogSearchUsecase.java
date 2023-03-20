@@ -1,7 +1,7 @@
 package com.ko.blog.service.usecase.search;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.ko.blog.store.dataprovider.kakao.SearchDataApiProvider;
+import com.ko.blog.store.dataprovider.kakao.KaKaoApiProvider;
 import com.ko.blog.store.webapi.kakaoApiRepository.payload.SearchBlogPayload;
 import java.io.Serializable;
 import java.util.List;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class BlogSearchUsecase {
 
-    private final SearchDataApiProvider searchDataApiProvider;
+    private final KaKaoApiProvider searchDataApiProvider;
     private final ModelMapper modelMapper;
 
     public Result execute(Command command) {
