@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResponseError {
-  private String message;
-  private String debug;
-  private String errorUUID;
+    private String message;
+    private String debug;
+    private String errorUUID;
 }

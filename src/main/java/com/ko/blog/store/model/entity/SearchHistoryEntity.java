@@ -17,16 +17,18 @@ import org.hibernate.annotations.GenericGenerator;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "SEARCH_HISTORY", indexes = @Index(name ="idx_keyword", columnList = "keyWord"))
+@Table(name = "SEARCH_HISTORY", indexes = @Index(name = "idx_keyword", columnList = "keyWord"))
 public class SearchHistoryEntity {
-  @Id
-  @GeneratedValue(generator = "system-uuid")
-  @GenericGenerator(name = "system-uuid", strategy = "uuid")
-  private String historyId;
+    @Id
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    private String historyId;
 
-  @Column
-  private String keyword;
+    @Column private String keyword;
 
-  @Column
-  private Integer count;
+    @Column private Integer count;
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
 }

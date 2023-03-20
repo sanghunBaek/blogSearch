@@ -2,6 +2,7 @@ package com.ko.blog.service.usecase.search;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ko.blog.store.dataprovider.kakao.KaKaoApiProvider;
+import com.ko.blog.store.dataprovider.serch.SearchHistoryEntityProvider;
 import com.ko.blog.store.webapi.kakaoApiRepository.payload.SearchBlogPayload;
 import java.io.Serializable;
 import java.util.List;
@@ -19,12 +20,20 @@ import org.springframework.stereotype.Service;
 public class BlogSearchUsecase {
 
     private final KaKaoApiProvider searchDataApiProvider;
+
+    private final SearchHistoryEntityProvider searchHistoryEntityProvider;
     private final ModelMapper modelMapper;
 
     public Result execute(Command command) {
         SearchBlogPayload searchBlogPayload =
                 searchDataApiProvider.getSearchBlog(
                         command.getQuery(), command.getSort(), command.getPage(), command.getSize());
+
+        String query = command.getQuery();
+        List<String> queryList = List.of(query.split(" "));
+        String keyword = queryList.size() == 1 ? queryList.get(0) : queryList.get(1);
+
+        searchHistoryEntityProvider.saveSearchHistory(keyword);
         return modelMapper.map(searchBlogPayload, Result.class);
     }
 

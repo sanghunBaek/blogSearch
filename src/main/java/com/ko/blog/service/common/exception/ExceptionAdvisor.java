@@ -14,20 +14,19 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class ExceptionAdvisor {
 
     @ExceptionHandler(MissingServletRequestParameterException.class)
-
-
     public ResponseEntity exceptionHandler(MissingServletRequestParameterException e) {
-      String errorUuid = generateErrorUuid();
-      ResponseError responseError = new ResponseError();
-      responseError.setDebug(e.toString());
-      responseError.setMessage(e.getMessage());
-      responseError.setErrorUUID(errorUuid);
-      log.info("Error Message : {}, Error UUID : {} ",e.getMessage(),errorUuid);
+        String errorUuid = generateErrorUuid();
+        ResponseError responseError = new ResponseError();
+        responseError.setDebug(e.toString());
+        responseError.setMessage(e.getMessage());
+        responseError.setErrorUUID(errorUuid);
+        log.info("Error Message : {}, Error UUID : {} ", e.getMessage(), errorUuid);
 
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ResponseError.builder().debug(e.toString()).message(e.getMessage()).build());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(ResponseError.builder().debug(e.toString()).message(e.getMessage()).build());
     }
 
-    private String generateErrorUuid(){
-      return UUID.randomUUID().toString();
+    private String generateErrorUuid() {
+        return UUID.randomUUID().toString();
     }
 }
