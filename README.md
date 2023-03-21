@@ -25,7 +25,7 @@
   - webapi : 외부 통신
 ---  
 #### 프로젝트 실행 
-- java -jar . blog-0.0.1-SNAPSHOT.jar
+- java -jar blog-0.0.1-SNAPSHOT.jar
   - 경로는 다운받은 jar 파일 위치에 맞춰 명령어 실행 , 직접 빌드시 ./build/libs/ 경로)
 ---  
 #### 명세서 작성 
