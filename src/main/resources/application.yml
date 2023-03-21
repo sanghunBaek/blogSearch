@@ -1,6 +1,15 @@
 server:
   port: ${prot:8080}
 
+extra-key:
+  kakao:
+    url: https://dapi.kakao.com
+    api-key: d1c748746e8672dcd5e2531fc0be695c
+  naver:
+    url: https://openapi.naver.com
+    client-id: XSjAmxU4s3ggjAs9iFbP
+    client-secret: NjE9lelZm7
+
 spring:
   codec:
     max-in-memory-size: 500KB

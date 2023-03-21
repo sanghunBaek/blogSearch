@@ -1,5 +1,6 @@
 package com.ko.blog.store.webapi;
 
+import com.ko.blog.service.common.config.ApiKey;
 import io.netty.channel.ChannelOption;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 import io.netty.handler.timeout.WriteTimeoutHandler;
@@ -16,8 +17,11 @@ import reactor.netty.http.client.HttpClient;
 @Service
 @Slf4j
 public class Webclient {
+    private final ApiKey API_KEY;
 
-    private String KAKAO_API_KEY = "d1c748746e8672dcd5e2531fc0be695c";
+    public Webclient(ApiKey apiKey) {
+        this.API_KEY = apiKey;
+    }
 
     HttpClient httpClient =
             HttpClient.create()
@@ -31,8 +35,25 @@ public class Webclient {
     public WebClient kakaoApi() {
         return WebClient.builder()
                 .clientConnector(new ReactorClientHttpConnector(httpClient.wiretap("kakaoApi")))
-                .baseUrl("https://dapi.kakao.com")
-                .defaultHeader("Authorization", "KakaoAK " + KAKAO_API_KEY)
+                .baseUrl(API_KEY.getKakaoApiUrl())
+                .defaultHeader("Authorization", "KakaoAK " + API_KEY.getKakaoApiKey())
+                .filter(
+                        (request, next) -> {
+                            log.info("Request: {} {}", request.method(), request.url());
+                            ClientResponse response = next.exchange(request).block();
+                            log.info(
+                                    "Response: {} {}", response.statusCode(), response.headers().asHttpHeaders());
+                            return Mono.just(response);
+                        })
+                .build();
+    }
+
+    public WebClient naverApi() {
+        return WebClient.builder()
+                .clientConnector(new ReactorClientHttpConnector(httpClient.wiretap("naverApi")))
+                .baseUrl(API_KEY.getNaverApiUrl())
+                .defaultHeader("X-Naver-Client-Id", API_KEY.getNaverApiClientId())
+                .defaultHeader("X-Naver-Client-Secret", API_KEY.getNaverApiClientSecret())
                 .filter(
                         (request, next) -> {
                             log.info("Request: {} {}", request.method(), request.url());

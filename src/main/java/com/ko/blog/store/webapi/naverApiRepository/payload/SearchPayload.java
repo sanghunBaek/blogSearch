@@ -1,4 +1,4 @@
-package com.ko.blog.store.webapi.kakaoApiRepository.payload;
+package com.ko.blog.store.webapi.naverApiRepository.payload;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,29 +11,23 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties
-public class SearchBlogPayload extends BasePayload {
-    private MetaData meta;
+public class SearchPayload {
+    @JsonProperty("items")
     private List<Document> documents;
-
-    @Data
-    public static class MetaData {
-        @JsonProperty("total_count")
-        private Integer totalCount;
-
-        @JsonProperty("pageable_count")
-        private Integer pageableCount;
-
-        @JsonProperty("is_end")
-        private Boolean isEnd;
-    }
-
     @Data
     public static class Document {
         private String title;
+
+        @JsonProperty("description")
         private String contents;
+
+        @JsonProperty("link")
         private String url;
+
+        @JsonProperty("bloggername")
         private String blogname;
-        private String thumbnail;
+
+        @JsonProperty("postdate")
         private String datetime;
     }
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -14,6 +15,7 @@ public class SearchHistoryEntityProviderImpl implements SearchHistoryEntityProvi
 
     private final SearchHistoryRepository searchHistoryRepository;
 
+    @Transactional
     public SearchHistoryEntity saveSearchHistory(final String keyword) {
         Optional<SearchHistoryEntity> entity = searchHistoryRepository.findByKeyword(keyword);
 

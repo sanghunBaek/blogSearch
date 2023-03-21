@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class ExceptionAdvisor {
 
     @ExceptionHandler(MissingServletRequestParameterException.class)
-    @ResponseStatus(code=HttpStatus.BAD_REQUEST)
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     public ResponseEntity parameterExceptionHandler(MissingServletRequestParameterException e) {
         String errorUuid = generateErrorUuid();
         ResponseError responseError =
@@ -32,17 +32,17 @@ public class ExceptionAdvisor {
     }
 
     @ExceptionHandler(Exception.class)
-    @ResponseStatus(code=HttpStatus.BAD_REQUEST)
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public ResponseEntity exceptionHandler(Exception e) {
         String errorUuid = generateErrorUuid();
         ResponseError responseError =
-            ResponseError.builder()
-                .debug(e.toString())
-                .code(ErrorCode.SYSTEM_ERROR.getCode())
-                .message(ErrorCode.SYSTEM_ERROR.getMessage())
-                .errorUUID(errorUuid)
-                .build();
+                ResponseError.builder()
+                        .debug(e.toString())
+                        .code(ErrorCode.SYSTEM_ERROR.getCode())
+                        .message(ErrorCode.SYSTEM_ERROR.getMessage())
+                        .errorUUID(errorUuid)
+                        .build();
         log.info("Error Message : {}, Error UUID : {} ", e.getMessage(), errorUuid);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(responseError);
     }

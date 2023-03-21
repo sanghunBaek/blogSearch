@@ -111,6 +111,7 @@ public class SearchControllerTest {
                                         fieldWithPath("documents.[].datetime").description("블로그 글 작성시간, ISO 8601 "),
                                         subsectionWithPath("meta").description("메타정보"),
                                         fieldWithPath("meta.totalCount").description("검색된 문서 수"),
+                                        fieldWithPath("meta.isEnd").description("다음 페이지 존재 여부"),
                                         fieldWithPath("meta.pageableCount").description("검색된 문서 수중 노출 가능한 문서 수"))))
                 .andExpect(status().isOk());
     }
