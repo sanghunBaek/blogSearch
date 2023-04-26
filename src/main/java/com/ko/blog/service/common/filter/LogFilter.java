@@ -21,6 +21,7 @@ public class LogFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         // 전처리
+        log.info("test");
         ContentCachingRequestWrapper httpServletRequest =
                 new ContentCachingRequestWrapper((HttpServletRequest) request);
         ContentCachingResponseWrapper httpServletResponse =
