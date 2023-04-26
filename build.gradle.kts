@@ -23,7 +23,10 @@ repositories {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-web"){
+        exclude(module ="spring-boot-starter-tomcat")
+    }
+    implementation("org.springframework.boot:spring-boot-starter-undertow")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("io.netty:netty-resolver-dns-native-macos:4.1.68.Final:osx-aarch_64")
     implementation("org.modelmapper:modelmapper:2.4.2")

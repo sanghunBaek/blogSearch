@@ -14,6 +14,7 @@ import com.ko.blog.config.RestDocsConfiguration;
 import com.ko.blog.service.controller.SearchController;
 import com.ko.blog.service.usecase.search.BlogSearchUsecase;
 import com.ko.blog.service.usecase.search.SearchRankUsecase;
+import com.ko.blog.service.usecase.search.TestMethodUsecase;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -49,6 +50,9 @@ public class SearchControllerTest {
 
     @MockBean // MemberController이 의존하는 빈을 모킹
     private BlogSearchUsecase blogSearchUsecase;
+
+    @MockBean // MemberController이 의존하는 빈을 모킹
+    private TestMethodUsecase testMethodUsecase;
 
     @BeforeEach
     void setUp(final WebApplicationContext context, final RestDocumentationContextProvider provider) {

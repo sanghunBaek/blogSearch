@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 public class SearchPayload {
     @JsonProperty("items")
     private List<Document> documents;
+
     @Data
     public static class Document {
         private String title;
